@@ -42,7 +42,7 @@ class WaitForElements(unittest.TestCase):
             element = "//div[@id='search-results-container']/div[%d]/div/div[2]/span/span[3]" % num
             for z in l:
                 if "GA, {}".format(z) in driver.find_element_by_xpath(element).text:
-                    # print "yes: ", driver.find_element_by_xpath(element).text
+                    print "yes: ", driver.find_element_by_xpath(element).text
                     break
             else:
                 city_zipcode = driver.find_element_by_xpath(element).text
@@ -59,14 +59,14 @@ class WaitForElements(unittest.TestCase):
         driver.find_element(By.CSS_SELECTOR, bayarea_tile_element).click()
         time.sleep(2)
 
-        l = ['Oakland', 'Alameda', 'Berkeley', 'Albany', 'El Cerrito', 'San Francisco']
-        for num in range(2, 28):
+        l = ['Oakland', 'Alameda', 'Berkeley', 'Albany', 'El Cerrito', 'San Francisco', 'Orinda']
+        for num in range(2, 48):
             # time.sleep(1)
             element = "//div[@id='search-results-container']/div[%d]/div/div[2]/span/span[3]" % num
 
             for c in l:
                 if c in driver.find_element_by_xpath(element).text:
-                    # print "yes: ", driver.find_element_by_xpath(element).text
+                    print "yes: ", driver.find_element_by_xpath(element).text
                     break
             else:
                 city = driver.find_element_by_xpath(element).text
@@ -85,7 +85,7 @@ class WaitForElements(unittest.TestCase):
         time.sleep(2)
 
         l = ['Boston', 'Cambridge', 'Roxbury', 'Somerville', 'El Cerrito', 'San Francisco']
-        for num in range(2, 28):
+        for num in range(2, 47):
             # time.sleep(1)
             element = "//div[@id='search-results-container']/div[%d]/div/div[2]/span/span[3]" % num
 
@@ -108,7 +108,7 @@ class WaitForElements(unittest.TestCase):
         time.sleep(2)
 
         l = ['Chicago']
-        for num in range(2, 28):
+        for num in range(2, 48):
             # time.sleep(1)
             element = "//div[@id='search-results-container']/div[%d]/div/div[2]/span/span[3]" % num
 
@@ -131,7 +131,7 @@ class WaitForElements(unittest.TestCase):
         time.sleep(2)
 
         l = ['Washington DC', 'Arlington VA']
-        for num in range(2, 28):
+        for num in range(2, 48):
             # time.sleep(1)
             element = "//div[@id='search-results-container']/div[%d]/div/div[2]/span/span[3]" % num
 
@@ -153,8 +153,8 @@ class WaitForElements(unittest.TestCase):
         driver.find_element(By.CSS_SELECTOR, denver_tile_element).click()
         time.sleep(2)
 
-        l = ['Denver CO', 'Lakewood CO', 'Englewood CO', 'Westminster CO', 'Aurora CO', 'Commerce City CO', 'Thornton CO']
-        for num in range(2, 28):
+        l = ['Denver CO', 'Lakewood CO', 'Englewood CO', 'Westminster CO', 'Westminister CO', 'Aurora CO', 'Commerce City CO', 'Thornton CO']
+        for num in range(2, 37):
             # time.sleep(1)
             element = "//div[@id='search-results-container']/div[%d]/div/div[2]/span/span[3]" % num
 
@@ -178,7 +178,7 @@ class WaitForElements(unittest.TestCase):
         time.sleep(2)
 
         l = ['Los Angeles CA', 'Monterey Park CA', 'Glendale CA']
-        for num in range(2, 28):
+        for num in range(2, 50):
             # time.sleep(1)
             element = "//div[@id='search-results-container']/div[%d]/div/div[2]/span/span[3]" % num
 
@@ -199,12 +199,11 @@ class WaitForElements(unittest.TestCase):
         # click to go to Atlanta results page
         driver.find_element(By.CSS_SELECTOR, nashville_tile_element).click()
         time.sleep(2)
-        l = ['Nashville TN', 'Madison TN', 'Brentwood TN']
 
-        for num in range(2, 28):
+        l = ['Nashville TN', 'Madison TN', 'Brentwood TN']
+        for num in range(2, 43):
             # time.sleep(1)
             element = "//div[@id='search-results-container']/div[%d]/div/div[2]/span/span[3]" % num
-
             for c in l:
                 if c in driver.find_element_by_xpath(element).text:
                     print "yes: ", driver.find_element_by_xpath(element).text
