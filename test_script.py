@@ -74,6 +74,34 @@ class WaitForElements(unittest.TestCase):
                 print "this is the guy im comparing".format(c)
                 self.fail("Failed: {}".format(city))
 
+
+    def test_results_boston(self):
+        
+        boston_tile_element = 'div.city-tile-boston'
+        see_tile = WebDriverWait(driver, 10).until(EC.presence_of_element_located((By.CSS_SELECTOR, boston_tile_element)))
+
+        # click to go to Atlanta results page
+        driver.find_element(By.CSS_SELECTOR, boston_tile_element).click()
+        time.sleep(2)
+
+        l = ['Boston', 'Cambridge', 'Roxbury', 'Somerville', 'El Cerrito', 'San Francisco']
+        for num in range(2, 28):
+            # time.sleep(1)
+            element = "//div[@id='search-results-container']/div[%d]/div/div[2]/span/span[3]" % num
+
+            for c in l:
+                if c in driver.find_element_by_xpath(element).text:
+                    print "yes: ", driver.find_element_by_xpath(element).text
+                    break
+            else:
+                city = driver.find_element_by_xpath(element).text
+                print "element xpath: ", element
+                print "this is the guy im comparing".format(c)
+                self.fail("Failed: {}".format(city))
+
+
+
+
     def tearDown(self):
         driver.quit()
 
