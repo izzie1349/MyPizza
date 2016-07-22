@@ -7,24 +7,12 @@ import unittest
 import time
 
 
-class WaitForElements(unittest.TestCase):
+class TestResults(unittest.TestCase):
 
     def setUp(self):
         global driver
         driver = webdriver.Firefox()
         driver.get("https://www.mypizza.com/")
-    
-    def test_wait_for_atlanta_tile(self):
-    	# time.sleep(5)
-
-    	atlanta_tile_element = 'div.city-tile-atlanta'
-        see_tile = WebDriverWait(driver, 10).until(EC.presence_of_element_located((By.CSS_SELECTOR, atlanta_tile_element)))
-
-    def test_wait_for_search_field(self):
-    	# time.sleep(5)
-
-    	search_field_element = 'project'
-        see_field = WebDriverWait(driver, 10).until(EC.presence_of_element_located((By.ID, search_field_element)))
 
     def test_results_atlanta(self):
         # wait for element
@@ -281,8 +269,31 @@ class WaitForElements(unittest.TestCase):
                 print "this is the guy im comparing".format(c)
                 self.fail("Failed: {}".format(city))
 
+    def test_results_seattle(self):
+        seattle_tile_element = 'div.city-tile-seattle'
+        see_tile = WebDriverWait(driver, 10).until(EC.presence_of_element_located((By.CSS_SELECTOR, seattle_tile_element)))
+
+        # click to go to Atlanta results page
+        driver.find_element(By.CSS_SELECTOR, seattle_tile_element).click()
+        time.sleep(2)
+
+        l = ['Seattle WA', 'Bellevue WA', 'Kirkland WA', 'Burien WA']
+        for num in range(2, 45):
+            # time.sleep(1)
+            element = "//div[@id='search-results-container']/div[%d]/div/div[2]/span/span[3]" % num
+            for c in l:
+                if c in driver.find_element_by_xpath(element).text:
+                    print "yes: ", driver.find_element_by_xpath(element).text
+                    break
+            else:
+                city = driver.find_element_by_xpath(element).text
+                print "element xpath: ", element
+                print "this is the guy im comparing".format(c)
+                self.fail("Failed: {}".format(city))
+
     def tearDown(self):
         driver.quit()
+
 
 if __name__ == "__main__":
    unittest.main()
