@@ -153,7 +153,7 @@ class WaitForElements(unittest.TestCase):
         driver.find_element(By.CSS_SELECTOR, denver_tile_element).click()
         time.sleep(2)
 
-        l = ['Denver CO', 'Lakewood CO', 'Englewood CO', 'Westminster CO', 'Westminister CO', 'Aurora CO', 'Commerce City CO', 'Thornton CO']
+        l = ['Denver CO', 'Lakewood CO', 'Englewood CO', 'Westminster CO', 'Westminister', 'Aurora CO', 'Commerce City CO', 'Thornton CO']
         for num in range(2, 37):
             # time.sleep(1)
             element = "//div[@id='search-results-container']/div[%d]/div/div[2]/span/span[3]" % num
@@ -224,6 +224,51 @@ class WaitForElements(unittest.TestCase):
 
         l = ['New York NY', 'Brooklyn NY',]
         for num in range(2, 49):
+            # time.sleep(1)
+            element = "//div[@id='search-results-container']/div[%d]/div/div[2]/span/span[3]" % num
+            for c in l:
+                if c in driver.find_element_by_xpath(element).text:
+                    print "yes: ", driver.find_element_by_xpath(element).text
+                    break
+            else:
+                city = driver.find_element_by_xpath(element).text
+                print "element xpath: ", element
+                print "this is the guy im comparing".format(c)
+                self.fail("Failed: {}".format(city))
+
+    def test_results_philadelphia(self):
+        philadelphia_tile_element = 'div.city-tile-philadelphia'
+        see_tile = WebDriverWait(driver, 10).until(EC.presence_of_element_located((By.CSS_SELECTOR, philadelphia_tile_element)))
+
+        # click to go to Atlanta results page
+        driver.find_element(By.CSS_SELECTOR, philadelphia_tile_element).click()
+        time.sleep(2)
+
+        l = ['Philadelphia PA']
+        for num in range(2, 49):
+            # time.sleep(1)
+            element = "//div[@id='search-results-container']/div[%d]/div/div[2]/span/span[3]" % num
+            for c in l:
+                if c in driver.find_element_by_xpath(element).text:
+                    print "yes: ", driver.find_element_by_xpath(element).text
+                    break
+            else:
+                city = driver.find_element_by_xpath(element).text
+                print "element xpath: ", element
+                print "this is the guy im comparing".format(c)
+                self.fail("Failed: {}".format(city))
+
+
+    def test_results_portland(self):
+        portland_tile_element = 'div.city-tile-portland'
+        see_tile = WebDriverWait(driver, 10).until(EC.presence_of_element_located((By.CSS_SELECTOR, portland_tile_element)))
+
+        # click to go to Atlanta results page
+        driver.find_element(By.CSS_SELECTOR, portland_tile_element).click()
+        time.sleep(2)
+
+        l = ['Beaverton OR', 'Lake Oswego OR', 'Happy Valley', 'Portland OR']
+        for num in range(2, 21):
             # time.sleep(1)
             element = "//div[@id='search-results-container']/div[%d]/div/div[2]/span/span[3]" % num
             for c in l:
